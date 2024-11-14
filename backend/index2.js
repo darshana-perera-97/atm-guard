@@ -168,6 +168,63 @@ app.get("/history4", (req, res) => {
   console.log(LastData4.length);
 });
 
+app.get("/alerts", (req, res) => {
+  fs.readFile("data.json", "utf8", (err, jsonData) => {
+    if (err) {
+      return res.status(500).json({ error: "Error reading data file" });
+    }
+
+    try {
+      const parsedData = JSON.parse(jsonData);
+      const latestEntries = parsedData.slice(-10).reverse(); // Get the last 10 entries
+
+      // Format each entry in the response structure for alerts
+      const alerts = latestEntries
+        .map((entry, index) => {
+          const timestamp = entry.timestamp;
+          const deviceData = entry.data.device1;
+
+          return [
+            {
+              id: index * 4 + 1,
+              item: "door",
+              state: deviceData.doorStatus,
+              time: timestamp,
+              device: "BOC - Nattandiya",
+            },
+            {
+              id: index * 4 + 2,
+              item: "grid",
+              state: deviceData.gridStatus,
+              time: timestamp,
+              device: "BOC - Nattandiya",
+            },
+            {
+              id: index * 4 + 3,
+              item: "motion",
+              state: deviceData.moction,
+              time: timestamp,
+              device: "BOC - Nattandiya",
+            },
+            {
+              id: index * 4 + 4,
+              item: "gas",
+              state: deviceData.gasStatus,
+              time: timestamp,
+              device: "BOC - Nattandiya",
+            },
+          ];
+        })
+        .flat(); // Flatten to a single array of alerts
+
+      res.json(alerts);
+    } catch (parseError) {
+      console.error("Error parsing data:", parseError);
+      res.status(500).json({ error: "Internal Server Error" });
+    }
+  });
+});
+
 // New route to retrieve the latest 20 entries from local JSON file
 app.get("/last", (req, res) => {
   fs.readFile("data.json", "utf8", (err, jsonData) => {
