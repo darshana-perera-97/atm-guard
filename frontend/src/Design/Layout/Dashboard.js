@@ -16,6 +16,7 @@ import Graphsn2 from "./Graphsn2";
 import Graphsn3 from "./Graphsn3";
 import Map1New from "./Map1New";
 import Map1 from "./Map1";
+import config from "../config";
 
 const Dashboard = (prop) => {
   const [motion, setMotion] = React.useState(false);
@@ -57,9 +58,7 @@ const Dashboard = (prop) => {
     setTimeFilter(eventKey);
   };
 
-  const [link, setLink] = React.useState(
-    "https://basic-node-js-backend.onrender.com/history4"
-  );
+  const [link, setLink] = React.useState(`${config.backendUrl}/history4`);
 
   // Calculate the distance between two coordinates in meters
   const calculateDistance = (lat1, lon1, lat2, lon2) => {
@@ -81,10 +80,7 @@ const Dashboard = (prop) => {
   React.useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(
-          // "http://localhost:3002/data2"
-          "https://basic-node-js-backend.onrender.com/data2"
-        );
+        const response = await fetch(`${config.backendUrl}/data2`);
         if (!response.ok) {
           throw new Error("Failed to fetch data");
         }
@@ -230,7 +226,6 @@ const Dashboard = (prop) => {
                 <p
                   className="ml-5 mt-4 mb-4 px-2 custom-btn"
                   onClick={handleLogout}
-                  
                 >
                   Back
                 </p>

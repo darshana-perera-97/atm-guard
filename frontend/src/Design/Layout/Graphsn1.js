@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Line } from "react-chartjs-2";
 import "chart.js/auto";
+import config from "../config"; 
 
 const Graphsn1 = (prop) => {
   const [chartDataTem, setChartDataTem] = useState({});
@@ -10,16 +11,12 @@ const Graphsn1 = (prop) => {
   const [chartDataAngles, setChartDataAngles] = useState({}); // Combined state for angle data
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [link, setLink] = useState(
-    "https://basic-node-js-backend.onrender.com/history4"
-  );
+  const [link, setLink] = useState(`${config.backendUrl}/history4`);
   // console.log(link);
   const fetchData = async () => {
     try {
       // setLink(prop.link);
-      const response = await fetch(
-        "https://basic-node-js-backend.onrender.com/history4"
-      );
+      const response = await fetch(`${config.backendUrl}/history4`);
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }

@@ -9,6 +9,7 @@ import {
   ButtonGroup,
 } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
+import config from "../config"; 
 
 export default function AlertsSet(prop) {
   const [alertsData, setAlertsData] = React.useState([
@@ -49,9 +50,7 @@ export default function AlertsSet(prop) {
   React.useEffect(() => {
     const fetchAlertsData = async () => {
       try {
-        const response = await fetch(
-          "https://basic-node-js-backend.onrender.com/alerts"
-        );
+        const response = await fetch(`${config.backendUrl}/alerts`);
         if (!response.ok) {
           throw new Error("Failed to fetch data");
         }

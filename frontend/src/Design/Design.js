@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import config from "./config"; 
 
 export default function Design() {
   const [data, setData] = useState(null);
@@ -7,7 +8,7 @@ export default function Design() {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          "http://localhost:3002/data"
+          `${config.backendUrl}/data`
         );
         if (!response.ok) {
           throw new Error("Failed to fetch data");

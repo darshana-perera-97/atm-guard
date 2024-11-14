@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
+import config from "../config";
 
 const Dashboard2 = () => {
   const [data, setData] = useState(null);
@@ -7,14 +8,14 @@ const Dashboard2 = () => {
 
   const fetchData = async () => {
     try {
-      const response = await fetch('http://localhost:3002/data'); // Ensure this URL is correct
+      const response = await fetch(`${config.backendUrl}/data`); // Ensure this URL is correct
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
       const result = await response.json();
       setData(result);
     } catch (error) {
-      console.error('Error fetching data:', error);
+      console.error("Error fetching data:", error);
       setError(error.message);
     } finally {
       setLoading(false);

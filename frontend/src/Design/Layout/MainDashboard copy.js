@@ -2,6 +2,8 @@
 import React from "react";
 import logo from "../Assets/ProductLogo.svg";
 import boc from "../Assets/boc.jpg";
+import config from "../config"; 
+
 import {
   Container,
   Dropdown,
@@ -55,7 +57,7 @@ const MainDashboard = () => {
       try {
         const response = await fetch(
           // "http://localhost:3002/data2"
-          "https://basic-node-js-backend.onrender.com/data2"
+          `${config.backendUrl}/data2`
         );
         if (!response.ok) {
           throw new Error("Failed to fetch data");
