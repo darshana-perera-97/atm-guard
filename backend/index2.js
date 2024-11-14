@@ -161,6 +161,7 @@ app.get("/history2", (req, res) => {
 app.get("/history3", (req, res) => {
   res.json(LastData3);
   console.log(LastData3.length);
+  
 });
 
 app.get("/history4", (req, res) => {
@@ -176,7 +177,7 @@ app.get("/alerts", (req, res) => {
 
     try {
       const parsedData = JSON.parse(jsonData);
-      const latestEntries = parsedData.slice(-10).reverse(); // Get the last 10 entries
+      const latestEntries = parsedData.slice(-10) // Get the last 10 entries
 
       // Format each entry in the response structure for alerts
       const alerts = latestEntries
