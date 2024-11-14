@@ -47,7 +47,7 @@ async function connectMongoDB(req, res, next) {
     req.mongoClient = client;
     next();
   } catch (error) {
-    console.error("Error connecting to MongoDB:", error);
+    // console.error("Error connecting to MongoDB:", error);
     res.status(500).json({ error: "Internal Server Error" });
   }
 }
@@ -74,7 +74,6 @@ async function fetchDataAndUpdateMongoDB() {
       return;
     }
 
-   
     // Get the value from the snapshot
     const data = snapshot.val();
     let currentDeviceTime = data.device1.state;
@@ -146,7 +145,7 @@ async function fetchDataAndUpdateMongoDB() {
       LastData4.shift(); // Remove the oldest document
     }
   } catch (error) {
-    console.error("Error fetching data or storing to MongoDB:", error);
+    // console.error("Error fetching data or storing to MongoDB:", error);
   }
 }
 
@@ -163,6 +162,14 @@ app.get("/data", async (req, res) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 });
+
+app.get("/", (req, res) => {
+  res.send("Hello, World!");
+});
+
+app.get("/data3", async (req, res) => {
+  console.log("object");
+});
 app.get("/data2", async (req, res) => {
   try {
     // Reference to the root of the database
@@ -177,6 +184,7 @@ app.get("/data2", async (req, res) => {
 
     // Get the value from the snapshot
     const data = snapshot.val();
+    console.log(data);
 
     // Get current date and time in Colombo
     const currentDateTime = moment().tz("Asia/Colombo").format();
