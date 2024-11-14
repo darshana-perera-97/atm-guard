@@ -1,6 +1,7 @@
 // src/config.js
 const config = {
-  backendUrl: "http://localhost:3002",
+  backendUrl: "http://108.181.199.62:3012",
+  // backendUrl: "http://localhost:3002",
   //   backendUrl: "https://basic-node-js-backend.onrender.com",
 };
 
